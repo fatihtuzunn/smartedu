@@ -1,9 +1,16 @@
 const express = require('express')
 const ejs = require('ejs');
+const pageRoute = require('./routes/pageRoute')
+const courseRoute = require('./routes/courseRoute')
 
-
+const mongoose = require('mongoose');
 
 const app = express()
+
+
+mongoose.connect('mongodb://localhost/smartedu');
+
+
 
 //middleware
 app.use(express.static('public'))
@@ -13,34 +20,8 @@ app.use(express.static('public'))
 app.set('view engine', 'ejs');
 
 //routes
-app.get('/', (req, res) => {    
-    res.render('index',)
-})
-
-app.get('/about', (req, res) => {    
-    res.render('about',)
-})
-
-app.get('/contact', (req, res) => {    
-    res.render('contact',)
-})
-
-app.get('/course-single', (req, res) => {    
-    res.render('course-single',)
-})
-
-app.get('/courses', (req, res) => {    
-    res.render('courses',)
-})
-app.get('/dashboard', (req, res) => {    
-    res.render('dashboard',)
-})
-app.get('/login', (req, res) => {    
-    res.render('login',)
-})
-app.get('/register', (req, res) => {    
-    res.render('register',)
-})
+app.use('/', pageRoute);
+app.use('/courses', courseRoute);
 
 
 
