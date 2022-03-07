@@ -18,6 +18,8 @@ CategoryScheme.pre('validate', function(next) {
 
 })
 
+
+
 const Category = mongoose.model('Category', CategoryScheme); //modele cevirme
 
 module.exports = Category;

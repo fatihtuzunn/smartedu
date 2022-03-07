@@ -3,6 +3,7 @@ const ejs = require('ejs');
 const pageRoute = require('./routes/pageRoute')
 const courseRoute = require('./routes/courseRoute')
 const categoryRoute = require('./routes/categoryRoute')
+const userRoute = require('./routes/userRoute')
 
 const mongoose = require('mongoose');
 
@@ -29,6 +30,7 @@ app.use('/courses', courseRoute);
     console.log(req.body);
 }) */
 app.use('/categories', categoryRoute); 
+app.use('/users', userRoute); 
 
 const port = 3000
 app.listen(port, () => {
