@@ -7,7 +7,11 @@ const CourseScheme = new Schema({
     name:{type:String, unique:true, required:true},
     description:{type:String, unique:true, required:true},
     createdAt:{type:Date, default: Date.now },
-    slug:{type:String, unique:true /* benzersiz olması id görevi görecek */ }
+    slug:{type:String, unique:true /* benzersiz olması id görevi görecek */ },
+    category:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Category'
+    }
 })
 
 //modeldeki name propsunu slug haline getireceğiz

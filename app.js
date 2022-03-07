@@ -2,6 +2,7 @@ const express = require('express')
 const ejs = require('ejs');
 const pageRoute = require('./routes/pageRoute')
 const courseRoute = require('./routes/courseRoute')
+const categoryRoute = require('./routes/categoryRoute')
 
 const mongoose = require('mongoose');
 
@@ -27,7 +28,7 @@ app.use('/courses', courseRoute);
 /* app.post('/courses',(req, res) => {
     console.log(req.body);
 }) */
-
+app.use('/categories', categoryRoute); 
 
 const port = 3000
 app.listen(port, () => {
