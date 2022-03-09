@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 
 
-/* 
+
 exports.createUser = async (req, res) => {
     
     try {
@@ -23,7 +23,7 @@ exports.createUser = async (req, res) => {
     }
         
 };
-
+/* 
 exports.loginUser =  async (req, res) => {
     try {
         const {email, password} = req.body;
@@ -53,7 +53,7 @@ exports.loginUser =  async (req, res) => {
 
 
   // signup route
-  exports.createUser= async (req, res) => {
+ /*  exports.createUser= async (req, res) => {
     const body = req.body;
 
     if (!(body.email && body.password)) {
@@ -67,7 +67,7 @@ exports.loginUser =  async (req, res) => {
     // now we set user password to hashed password
     user.password = await bcrypt.hash(user.password, salt);
     user.save().then((doc) => res.status(201).send(doc));
-  }
+  } */
 
   // login route
   exports.loginUser = async (req, res) => {
@@ -77,11 +77,30 @@ exports.loginUser =  async (req, res) => {
       // check user password with hashed password stored in the database
       const validPassword = await bcrypt.compare(body.password, user.password);
       if (validPassword) {
-        res.status(200).json({ message: "Valid password" });
+        //USer session
+        req.session.userID = user._id;
+        
+        res.redirect('/');
       } else {
-        res.status(400).json({ error: "Invalid Password" });
+        
+        res.status(400).redirect('/login?error=invalid_password') 
+
       }
     } else {
-      res.status(401).json({ error: "User does not exist" });
+      res.status(401).redirect('/login?error=user_not_found') 
+      
     }
   }
+
+  exports.logoutUser = async (req, res) => {
+    try {
+      req.session.destroy(()=> {
+        res.redirect('/');
+      });
+    } catch (error) {
+      res.status(400).json({
+          status: 'error',
+          error,
+      });      
+  }
+}

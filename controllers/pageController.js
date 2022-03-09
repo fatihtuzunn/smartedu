@@ -34,8 +34,10 @@ exports.getDashboardPage = (req, res) => {
 };
 
 exports.getLoginPage = (req, res) => {
+    var error = req.query.error;
     res.status(200).render('login',{
-        page_name: 'login'
+        page_name: 'login',
+        error
     })
 };
 exports.getRegisterPage = (req, res) => {

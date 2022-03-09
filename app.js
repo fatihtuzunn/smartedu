@@ -26,10 +26,9 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 app.use(session({
-    secret: 'keyboard cat',
+    secret: 'knights who say ni',
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
+    saveUninitialized: true
   }))
 
   app.use('*', (req, res, next) => {
